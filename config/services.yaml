@@ -1,0 +1,76 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    jms_serializer.camel_case_naming_strategy.class: JMS\Serializer\Naming\IdenticalPropertyNamingStrategy
+    jms_serializer.serialized_name_annotation_strategy.class: JMS\Serializer\Naming\IdenticalPropertyNamingStrategy
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+    #####################
+    ##### listeners #####
+    #####################
+    App\Doctrine\HashPasswordListener:
+        arguments: ['@security.user_password_encoder.generic']
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    App\EventListener\AuthenticationSuccessListener:
+        class: App\EventListener\AuthenticationSuccessListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }
+
+    ####################
+    ###### services ####
+    ####################
+
+    App\Util\User\UserManagerInterface: '@App\Util\User\UserManager'
+
+    App\Util\Board\BoardManagerInterface: '@App\Util\Board\BoardManager'
+
+    App\Util\Lists\ListsManagerInterface: '@App\Util\Lists\ListsManager'
+
+    App\Util\Task\TaskManagerInterface: '@App\Util\Task\TaskManager'
+
+    ###################
+    ##### aliases #####
+    ###################
+
+    app.user_manager:
+        alias: 'App\Util\User\UserManagerInterface'
+        public: true
+
+    app.board_manager:
+        alias: 'App\Util\Board\BoardManagerInterface'
+        public: true
+
+    app.lists_manager:
+        alias: 'App\Util\Lists\ListsManagerInterface'
+        public: true
+
+    app.task_manager:
+        alias: 'App\Util\Task\TaskManagerInterface'
+        public: true
+
+    jms_serializer.naming_strategy:
+        alias: jms_serializer.identical_property_naming_strategy

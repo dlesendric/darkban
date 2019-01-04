@@ -1,0 +1,5 @@
+jms_serializer:
+    default_context:
+        serialization:
+            groups: ['Default']
+            serialize_null: true

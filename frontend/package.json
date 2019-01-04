@@ -1,0 +1,42 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bootstrap": "^4.2.1",
+    "classnames": "^2.2.6",
+    "history": "^4.7.2",
+    "jquery": "^3.3.1",
+    "moment": "^2.23.0",
+    "popper.js": "^1.14.6",
+    "prop-types": "^15.6.2",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0",
+    "react-dragula": "^1.1.17",
+    "react-redux": "^6.0.0",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "^2.1.2",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "frontend"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "node-sass": "^4.11.0"
+  }
+}
