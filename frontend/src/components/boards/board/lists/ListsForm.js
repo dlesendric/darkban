@@ -44,7 +44,7 @@ class ListsForm extends Component {
       <form onSubmit={(event) => { this.onSubmit(event) }}>
         <div className="form-group">
           <label className="control-label">List name:</label>
-          <input ref={this.textInput} type="text" value={name} placeholder="List name..." className="form-control" name="name" onChange={(event) => { this.onChange(event) }} />
+          <input ref={this.textInput} type="text" value={name} placeholder="List name..." className="form-control" name="name" onChange={(event) => { this.onChange(event) }} required="required"/>
         </div>
         <div className="form-group text-right">
           <button type="submit" className="btn btn-primary">Create</button>

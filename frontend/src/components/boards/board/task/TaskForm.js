@@ -44,7 +44,7 @@ class TaskForm extends Component {
         <form className={classnames(`${formClass} mt-3`)} onSubmit={(event) => { this.onSubmit(event) }}>
           <div className="form-group">
             <label className="control-label">Task name</label>
-            <input type="text" className="form-control" placeholder="Task name..." name="name" value={name} onChange={(e) => { this.onChange(e) }} />
+            <input type="text" className="form-control" placeholder="Task name..." name="name" value={name} onChange={(e) => { this.onChange(e) }} required="required"/>
           </div>
           <div className="form-group text-right">
             <button type="submit" className="btn btn-primary btn-sm">Submit</button>

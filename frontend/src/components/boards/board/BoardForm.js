@@ -69,7 +69,7 @@ class BoardForm extends Component {
       <form onSubmit={(event) => { this.onSubmit(event) }}>
         <div className="form-group">
           <label className="control-label">Board name:</label>
-          <input type="text" name="name" value={name} className="form-control" onChange={(event) => { this.onChange(event) }} ref={this.textInput} />
+          <input type="text" name="name" value={name} className="form-control" onChange={(event) => { this.onChange(event) }} ref={this.textInput} required="required" />
         </div>
         <div className="form-group">
           <label className="control-label">Description:</label>
