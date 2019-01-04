@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import store from '../../../store'
 import { createBoard, toggleModal } from "../../../store/actions"
+import { getUser } from "../../../utils/helpers";
 
 class BoardForm extends Component {
   constructor(props) {
@@ -60,6 +61,10 @@ class BoardForm extends Component {
     const { users } = this.props
     const { name } = this.state
 
+    const filteredUsers = users.filter((user) => {
+      return user.id !== getUser().id
+    })
+
     return (
       <form onSubmit={(event) => { this.onSubmit(event) }}>
         <div className="form-group">
@@ -74,7 +79,7 @@ class BoardForm extends Component {
           <label className="control-label">Invite users:</label>
           <select name="users" className="form-control" onChange={(event) => { this.onChangeUsers(event) }}>
             <option value="">Choose users...</option>
-            {users.map((user) => {
+            {filteredUsers.map((user) => {
               return <option key={user.id} value={user.id}>{user.email}</option>
             })}
           </select>
